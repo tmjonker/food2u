@@ -1,70 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en" class="h-100" xmlns:th="https://thymeleaf.org">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+<head th:replace="fragments/general :: head"></head>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Kufam:wght@500;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/8ddd18f331.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../static/css/style.css"/>
-    <link rel="icon" type="image/png" href="../static/images/favicon.ico"/>
-    <title>Food2U</title>
-</head>
-
-<header id="navigation">
-
-    <body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100">
     <main role="main" class="flex-shrink-0">
 
-        <nav class="navbar navbar-expand-md fixed-top">
-            <a href="index.html"><span class="navbar-brand">Food2u</span></a>
-            <button class="navbar-toggler collapsed navbar-dark" type="button" data-toggle="collapse"
-                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse" id="navbarCollapse" style="">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link link" href="sign-in.html">Sign In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link" href="sign-up.html">Sign Up</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link" href="#">About</a>
-                    </li>
-                </ul>
-                <div class="navbar-nav ml-auto">
-                    <a class="nav-link link" href="#">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a class="nav-link link" href="#">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-            </div>
-        </nav>
-</header>
+    <header th:replace="fragments/general :: header"></header>
 
-<section id="main-content">
+    <section id="main-content">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-auto col-md-auto col-sm-auto form-col">
-                <h3 class="sign-in-header">Sign in to your account</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-auto col-md-auto col-sm-auto form-col">
+                    <h3 class="sign-in-header">Sign in to your account</h3>
                     <form>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp" required>
+                                aria-describedby="emailHelp" required>
                             <small id="emailHelp" class="form-text">We'll never share your email with anyone
                                 else.</small>
                         </div>
@@ -74,28 +28,27 @@
                         </div>
                         <button type="submit" class="btn btn-dark submit-button">Submit</button>
                     </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+    </main>
 
-<footer id="footer" class="footer mt-auto py-3">
-    <div class="container">
-        <p>&#169; 2020 Timothy Jonker</p>
-    </div>
-</footer>
+    <footer th:replace="fragments/general :: footer">
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-</script>
+    </script>
 </body>
 
 </html>

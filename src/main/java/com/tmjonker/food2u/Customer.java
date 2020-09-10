@@ -1,6 +1,16 @@
 package com.tmjonker.food2u;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Customer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     private String email;
     private String password;
@@ -12,6 +22,14 @@ public class Customer {
     private String city;
     private String state;
     private Integer zipCode;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public void setAddress(String address) {
         this.address = address;
