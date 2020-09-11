@@ -13,7 +13,7 @@ public class WebController {
 
     @GetMapping("/sign-up")
     public String signUpForm(Model model) {
-        model.addAttribute("newCustomer", new Customer());
+        model.addAttribute("customerForm", new CustomerForm());
         return "sign-up";
     }
 
@@ -24,19 +24,19 @@ public class WebController {
                                              @RequestParam String address2, @RequestParam String city,
                                              @RequestParam String state, @RequestParam Integer zipCode) {
 
-        Customer customer = new Customer();
-        customer.setEmail(email);
-        customer.setPassword(password);
-        customer.setFirstName(firstName);
-        customer.setMiddleInitial(middleInitial);
-        customer.setLastName(lastName);
-        customer.setAddress(address);
-        customer.setAddress2(address2);
-        customer.setCity(city);
-        customer.setState(state);
-        customer.setZipCode(zipCode);
+        CustomerForm customerForm = new CustomerForm();
+        customerForm.setEmail(email);
+        customerForm.setPassword(password);
+        customerForm.setFirstName(firstName);
+        customerForm.setMiddleInitial(middleInitial);
+        customerForm.setLastName(lastName);
+        customerForm.setAddress(address);
+        customerForm.setAddress2(address2);
+        customerForm.setCity(city);
+        customerForm.setState(state);
+        customerForm.setZipCode(zipCode);
 
-        customerRepository.save(customer);
+        customerRepository.save(customerForm);
 
         return "result";
     }
