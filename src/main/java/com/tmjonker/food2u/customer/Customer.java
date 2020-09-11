@@ -1,4 +1,4 @@
-package com.tmjonker.food2u;
+package com.tmjonker.food2u.customer;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -16,8 +16,7 @@ public class Customer {
     @NotNull
     private String email;
     @NotNull
-    @Size(min=8, max=30)
-    private String password;
+    private byte[] password;
     @NotNull
     private String firstName;
     private String middleInitial;
@@ -81,7 +80,7 @@ public class Customer {
         return middleInitial;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
@@ -113,7 +112,7 @@ public class Customer {
         this.middleInitial = middleInitial;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
     }
 

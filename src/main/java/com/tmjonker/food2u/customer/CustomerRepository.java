@@ -1,4 +1,4 @@
-package com.tmjonker.food2u;
+package com.tmjonker.food2u.customer;
 
 import org.springframework.data.repository.CrudRepository;
 
