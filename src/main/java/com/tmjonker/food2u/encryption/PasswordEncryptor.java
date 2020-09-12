@@ -9,12 +9,19 @@ import java.security.GeneralSecurityException;
 
 public class PasswordEncryptor {
 
-    public static byte[] encryptPassword(String password, String email) throws GeneralSecurityException {
+    private KeysetHandle keysetHandle;
+
+    public byte[] encryptPassword(String password, String email) throws GeneralSecurityException {
         TinkConfig.register();
 
-        KeysetHandle keysetHandle = KeysetHandle.generateNew(AesGcmKeyManager.aes128GcmTemplate());
+        keysetHandle = KeysetHandle.generateNew(AesGcmKeyManager.aes128GcmTemplate());
         Aead aead = keysetHandle.getPrimitive(Aead.class);
 
         return aead.encrypt(password.getBytes(), email.getBytes()); // returns encrypted password.
+    }
+
+    public KeysetHandle getKeysetHandle() {
+
+        return keysetHandle;
     }
 }

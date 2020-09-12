@@ -1,9 +1,9 @@
-package com.tmjonker.food2u.customer;
+package com.tmjonker.food2u.entities.customer;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class CustomerForm {
+public class NewCustomerForm {
 
     @NotNull
     private String email;
@@ -24,6 +24,15 @@ public class CustomerForm {
     private String state;
     @NotNull
     private Integer zipCode;
+    private boolean exists;
+
+    public boolean isExists() {
+        return exists;
+    }
+
+    public void setExists(boolean exists) {
+        this.exists = exists;
+    }
 
     public void setAddress(String address) {
         this.address = address;
@@ -103,5 +112,10 @@ public class CustomerForm {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Customer toCustomer() {
+
+        return new Customer(email, firstName, middleInitial, lastName, address, address2, city, state, zipCode);
     }
 }

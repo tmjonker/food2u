@@ -13,6 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-auto col-md-auto col-sm-auto form-col">
+                    <p th:text="${returningCustomerForm.alreadyExists} ? 'Account with email ' + ${returningCustomerForm.email} +' already exists.'"></p>
                     <h3 class="sign-in-header">Sign in to your account</h3>
                     <form>
                         <div class="form-group">
