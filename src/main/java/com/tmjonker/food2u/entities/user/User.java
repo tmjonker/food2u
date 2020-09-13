@@ -1,13 +1,20 @@
-package com.tmjonker.food2u.entities.customer;
+package com.tmjonker.food2u.entities.user;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
-public class Customer {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +22,7 @@ public class Customer {
     @NotNull
     private String email;
     @NotNull
-    private byte[] password;
+    private String password;
     @NotNull
     private String firstName;
     private String middleInitial;
@@ -30,21 +37,12 @@ public class Customer {
     private String state;
     @NotNull
     private Integer zipCode;
+    @NotNull
+    private Role role;
 
-    public Customer(String email, String firstName, String middleInitial, String lastName, String address,
-                    String address2, String city, String state, Integer zipCode) {
-        this.email = email;
-        this.firstName = firstName;
-        this.middleInitial = middleInitial;
-        this.lastName = lastName;
-        this.address = address;
-        this.address2 = address2;
-        this.city = city;
-        this.state = state;
-        this.zipCode = zipCode;
+    public User() {
+        role = Role.USER;
     }
-
-    public Customer() {}
 
     public Integer getId() {
         return id;
@@ -94,10 +92,6 @@ public class Customer {
         return middleInitial;
     }
 
-    public byte[] getPassword() {
-        return password;
-    }
-
     public String getState() {
         return state;
     }
@@ -126,11 +120,57 @@ public class Customer {
         this.middleInitial = middleInitial;
     }
 
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
+        roleList.add(new SimpleGrantedAuthority(role.toString()));
+
+        return roleList;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

@@ -1,14 +1,20 @@
-package com.tmjonker.food2u.entities.customer;
+package com.tmjonker.food2u.entities.user;
 
 import javax.validation.constraints.NotNull;
 
-public class ReturningCustomerForm {
+public class ReturningUserForm {
 
     @NotNull
     private String email;
-    @NotNull
     private String password;
     private boolean alreadyExists;
+
+    public ReturningUserForm(String email, String password, boolean alreadyExists) {
+
+        this.email = email;
+        this.password = password;
+        this.alreadyExists = alreadyExists;
+    }
 
     public boolean getAlreadyExists() {
         return alreadyExists;

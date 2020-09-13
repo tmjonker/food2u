@@ -141,6 +141,10 @@ p {
     color: #f1f3f8;
 }
 
+.sign-in-div {
+    max-width: 389px;
+}
+
 .form-text {
     color: #f1f3f8;
     font-weight: lighter;
@@ -155,7 +159,28 @@ form {
     top: 10px;
 }
 
+.account-exists {
+    text-align: center;
+    background-color: #ed0c17;
+    overflow: auto;
+    color: #f1f3f8;
+    margin: 25px auto;
+    padding: 10px 10px;
+}
+
 @media screen and (max-width: 700px) {
+    .form-col {
+        width: 85%;
+    }
+
+    .form-col {
+        position: static;
+        transform: none;
+        margin: 60px auto;
+    }
+}
+
+@media screen and (max-height: 750px) {
     .form-col {
         width: 85%;
     }

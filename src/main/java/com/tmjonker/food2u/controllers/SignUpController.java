@@ -1,20 +1,18 @@
 package com.tmjonker.food2u.controllers;
 
-import com.tmjonker.food2u.entities.customer.Customer;
-import com.tmjonker.food2u.entities.customer.NewCustomerForm;
-import com.tmjonker.food2u.entities.customer.CustomerRepository;
-import com.tmjonker.food2u.encryption.PasswordEncryptor;
-import com.tmjonker.food2u.entities.customer.ReturningCustomerForm;
-import com.tmjonker.food2u.entities.keyset.Keyset;
-import com.tmjonker.food2u.entities.keyset.KeysetRepository;
+import com.tmjonker.food2u.entities.user.ReturningUserForm;
+import com.tmjonker.food2u.entities.user.User;
+import com.tmjonker.food2u.entities.user.UserRepository;
 import com.tmjonker.food2u.logging.Food2uLogger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
-import java.security.GeneralSecurityException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Controller
@@ -23,44 +21,28 @@ public class SignUpController {
     private static final Logger LOGGER = Food2uLogger.setUp(SignUpController.class.getName());
 
     @Autowired
-    private CustomerRepository customerRepository;
-
+    private UserRepository userRepository;
     @Autowired
-    private KeysetRepository keysetRepository;
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/sign-up")
     public String signUpForm(Model model) {
-        model.addAttribute("newCustomerForm", new NewCustomerForm());
+        model.addAttribute("newUser", new User());
         return "sign-up";
     }
 
     @PostMapping("/sign-up")
-    public String signUpSubmit(@ModelAttribute NewCustomerForm newCustomerForm, Model model) {
+    public String signUpSubmit(@ModelAttribute User newUser, Model model, RedirectAttributes redirectAttributes) {
 
-        Customer customer = newCustomerForm.toCustomer();
-        Keyset keyset = new Keyset();
-
-        try {
-            PasswordEncryptor passwordEncryptor = new PasswordEncryptor();
-            customer.setPassword(passwordEncryptor.encryptPassword(newCustomerForm.getPassword(), newCustomerForm.getEmail()));
-            keyset.setKeysetHandle(passwordEncryptor.getKeysetHandle().toString());
-        } catch (GeneralSecurityException ex) {
-            LOGGER.log(Level.SEVERE, "Error while trying to encrypt password.", ex);
-            return "sign-up";
-        }
-
-        if (!customerRepository.existsByEmail(newCustomerForm.getEmail())) {
-            customerRepository.save(customer);
-            keyset.setId(customer.getId());
-            keysetRepository.save(keyset);
-            model.addAttribute("newCustomerForm", customer);
+        if (!userRepository.existsByEmail(newUser.getEmail())) {
+            newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            userRepository.save(newUser);
+            model.addAttribute("newUser", newUser);
             return "result";
         } else {
-            ReturningCustomerForm returningCustomerForm = new ReturningCustomerForm();
-            returningCustomerForm.setAlreadyExists(true);
-            returningCustomerForm.setEmail(newCustomerForm.getEmail());
-            model.addAttribute("returningCustomerForm", returningCustomerForm);
-            return "sign-in";
+            ReturningUserForm returningUserForm = new ReturningUserForm(newUser.getEmail(), null, true);
+            redirectAttributes.addFlashAttribute("returningUserForm", returningUserForm);
+            return "redirect:/sign-in";
         }
     }
 }
