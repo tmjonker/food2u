@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-auto col-md-auto col-sm-auto form-col sign-in-div">
-                        <p class="account-exists" th:inline="text" th:if="${user.alreadyExists}">
+                        <p class="account-exists" th:inline="text" th:if="${returningUser.alreadyExists}">
                             Account with email [[${returningUserForm.email}]] already exists. Please sign in.
                         </p>
                         <p class="account-exists" th:inline="text" th:if="${param.error}">
@@ -23,16 +23,16 @@
                             You have been logged out.
                         </p>
                         <h3 class="sign-in-header">Sign in to your account</h3>
-                        <form id="sign-in" th:action="@{/sign-in}" th:object="${user}" method="post">
+                        <form id="sign-in" th:action="@{/sign-in}" th:object="${returningUser}" method="post">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                    th:field="*{email}" required>
+                                <input type="email" name="username" class="form-control" id="exampleInputEmail1"
+                                    th:field="*{username}" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
-                                       th:field="*{password}" required>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                                       required>
                             </div>
                             <button type="submit" class="btn btn-dark submit-button">Submit</button>
                         </form>

@@ -9,9 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.logging.Logger;
 
@@ -40,7 +38,7 @@ public class SignUpController {
             model.addAttribute("newUser", newUser);
             return "result";
         } else {
-            ReturningUserForm returningUserForm = new ReturningUserForm(newUser.getEmail(), null, true);
+            ReturningUserForm returningUserForm = new ReturningUserForm(newUser.getEmail(), true);
             redirectAttributes.addFlashAttribute("returningUserForm", returningUserForm);
             return "redirect:/sign-in";
         }

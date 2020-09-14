@@ -1,42 +1,34 @@
 package com.tmjonker.food2u.entities.user;
 
-import javax.validation.constraints.NotNull;
-
 public class ReturningUserForm {
 
-    @NotNull
-    private String email;
-    private String password;
-    private boolean alreadyExists;
+    private String username;
+    private Boolean alreadyExists;
 
-    public ReturningUserForm(String email, String password, boolean alreadyExists) {
+    public ReturningUserForm(String email, Boolean alreadyExists) {
 
-        this.email = email;
-        this.password = password;
-        this.alreadyExists = alreadyExists;
+        this.username = email;
+        if (alreadyExists == null)
+            this.alreadyExists = false;
+        else
+            this.alreadyExists = alreadyExists;
     }
 
-    public boolean getAlreadyExists() {
+    public Boolean getAlreadyExists() {
         return alreadyExists;
     }
 
-    public void setAlreadyExists(boolean alreadyExists) {
+    public void setAlreadyExists(Boolean alreadyExists) {
         this.alreadyExists = alreadyExists;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 }

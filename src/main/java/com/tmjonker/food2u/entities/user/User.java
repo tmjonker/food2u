@@ -38,10 +38,10 @@ public class User implements UserDetails {
     @NotNull
     private Integer zipCode;
     @NotNull
-    private Role role;
+    private String role;
 
     public User() {
-        role = Role.USER;
+        role = Role.USER.toString();
     }
 
     public Integer getId() {
@@ -128,12 +128,12 @@ public class User implements UserDetails {
         this.state = state;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
     public void setRole(Role role) {
-        this.role = role;
+        this.role = role.toString();
     }
 
     @Override

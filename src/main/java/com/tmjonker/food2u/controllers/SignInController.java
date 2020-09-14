@@ -20,15 +20,15 @@ public class SignInController {
     private UserRepository userRepository;
 
     @GetMapping("/sign-in")
-    public String signInform(@ModelAttribute("returningUserForm") ReturningUserForm returningUserForm, Model model) {
+    public String signInform(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
 
-        model.addAttribute("user", returningUserForm);
+        model.addAttribute("returningUser", returningUserForm);
         return "sign-in";
     }
 
     @PostMapping("/sign-in")
     public String signInSubmit(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
 
-            return "result";
+        return "result";
     }
 }
