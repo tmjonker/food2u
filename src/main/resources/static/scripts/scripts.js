@@ -1,3 +1,4 @@
+/*
 let password1 = document.getElementById("inputPassword1");
 let password2 = document.getElementById("inputPassword2");
 
@@ -25,3 +26,4 @@ password1.addEventListener("input", function (event) {
         password1.reportValidity();
     }
 });
+*/

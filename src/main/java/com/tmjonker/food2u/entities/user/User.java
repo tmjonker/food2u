@@ -41,7 +41,22 @@ public class User implements UserDetails {
     private String role;
 
     public User() {
-        role = Role.USER.toString();
+        role = Role.USER.name();
+    }
+
+    public User(String email, String password, String firstName, String middleInitial, String lastName,
+                String address, String address2, String city, String state, Integer zipCode) {
+        this.email = email;
+        this. password = password;
+        this.firstName = firstName;
+        this.middleInitial = middleInitial;
+        this.lastName = lastName;
+        this.address = address;
+        this.address2 = address2;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        role = Role.USER.name();
     }
 
     public Integer getId() {

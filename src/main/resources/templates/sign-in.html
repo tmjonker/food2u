@@ -13,17 +13,17 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-auto col-md-auto col-sm-auto form-col sign-in-div">
-                        <p class="account-exists" th:inline="text" th:if="${returningUser.alreadyExists}">
-                            Account with email [[${returningUserForm.email}]] already exists. Please sign in.
-                        </p>
-                        <p class="account-exists" th:inline="text" th:if="${param.error}">
-                            The username and password combination entered returned no results.  Please try again.
-                        </p>
-                        <p class="account-exists" th:inline="text" th:if="${param.logout}">
-                            You have been logged out.
-                        </p>
                         <h3 class="sign-in-header">Sign in to your account</h3>
                         <form id="sign-in" th:action="@{/sign-in}" th:object="${returningUser}" method="post">
+                            <p class="form-error" th:inline="text" th:if="${returningUser.alreadyExists}">
+                                Account with email [[${returningUserForm.email}]] already exists. Please sign in.
+                            </p>
+                            <p class="form-error" th:inline="text" th:if="${param.error}">
+                                The username and password combination entered returned no results.  Please try again.
+                            </p>
+                            <p class="form-error" th:inline="text" th:if="${param.logout}">
+                                You have been logged out.
+                            </p>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
                                 <input type="email" name="username" class="form-control" id="exampleInputEmail1"
