@@ -1,6 +1,6 @@
 # Food2u
 
-![screenshot of program]()
+![screenshot of program](http://github.com/tmjonker/images/home.png)
 
 ## Description
 
