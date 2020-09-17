@@ -1,8 +1,6 @@
 package com.tmjonker.food2u.entities.user;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class NewUserForm {
 
@@ -33,8 +31,8 @@ public class NewUserForm {
     @Size(min=2)
     private String state;
     @NotNull
-    @Min(00001)
-    private Integer zipCode;
+    @Pattern(regexp="\\d{5,}")
+    private String zipCode;
     private Boolean passwordsMatch;
 
     public NewUserForm() {
@@ -49,11 +47,11 @@ public class NewUserForm {
         return address;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 

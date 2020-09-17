@@ -36,7 +36,7 @@ public class User implements UserDetails {
     @NotNull
     private String state;
     @NotNull
-    private Integer zipCode;
+    private String zipCode;
     @NotNull
     private String role;
 
@@ -45,7 +45,7 @@ public class User implements UserDetails {
     }
 
     public User(String email, String password, String firstName, String middleInitial, String lastName,
-                String address, String address2, String city, String state, Integer zipCode) {
+                String address, String address2, String city, String state, String zipCode) {
         this.email = email;
         this. password = password;
         this.firstName = firstName;
@@ -75,11 +75,11 @@ public class User implements UserDetails {
         return address;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
