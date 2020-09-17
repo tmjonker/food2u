@@ -5,6 +5,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 food2u-log.log
+food2u-log.log.lck
 
 ### STS ###
 .apt_generated
