@@ -14,12 +14,12 @@
                 <div class="row">
                     <div class="col-lg-auto col-md-auto col-sm-auto form-col sign-in-div">
                         <h3 class="sign-in-header">Sign in to your account</h3>
-                        <form id="sign-in" th:action="@{/sign-in}" th:object="${returningUser}" method="post">
+                        <form class="lusu-form" id="sign-in" th:action="@{/sign-in}" th:object="${returningUser}" method="post">
                             <p class="form-error" th:inline="text" th:if="${returningUser.alreadyExists}">
                                 Account with email [[${returningUserForm.email}]] already exists. Please sign in.
                             </p>
                             <p class="form-error" th:inline="text" th:if="${param.error}">
-                                The username and password combination entered returned no results.  Please try again.
+                                The username and password combination entered returned no results. Please try again.
                             </p>
                             <p class="form-error" th:inline="text" th:if="${param.logout}">
                                 You have been logged out.
@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
                                 <input type="password" name="password" class="form-control" id="exampleInputPassword1"
-                                       required>
+                                    required>
                             </div>
                             <button type="submit" class="btn btn-dark submit-button">Submit</button>
                         </form>
@@ -42,9 +42,7 @@
         </section>
     </main>
 
-    <footer th:replace="fragments/general :: footer">
-
-    </footer>
+    <footer th:replace="fragments/general :: footer"></footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

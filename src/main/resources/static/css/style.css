@@ -22,11 +22,16 @@ p {
     font-family: "Kufam";
     font-size: 2.20rem;
     font-weight: 600;
+    padding-right: 20px;
 }
 
 .navbar {
     padding: 0 1%;
     background-color: #393b44;
+}
+
+.main-link {
+    margin-right: 20px;
 }
 
 .link {
@@ -36,6 +41,14 @@ p {
 
 .link:hover {
     color: #d6e0f0;
+}
+
+.dropdown-menu {
+    background-color: #393b44;
+}
+
+.dropdown-item:hover {
+    background-color: #393b44;
 }
 
 /* Footer css */
@@ -150,7 +163,7 @@ p {
     font-weight: lighter;
 }
 
-form {
+.lusu-form {
     padding: 50px;
 }
 

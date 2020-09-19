@@ -148,13 +148,13 @@ public class User implements UserDetails {
     }
 
     public void setRole(Role role) {
-        this.role = role.toString();
+        this.role = role.name();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> roleList = new ArrayList<GrantedAuthority>();
-        roleList.add(new SimpleGrantedAuthority(role.toString()));
+        roleList.add(new SimpleGrantedAuthority(role));
 
         return roleList;
     }
