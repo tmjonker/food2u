@@ -16,12 +16,12 @@ public class WelcomeController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/result")
+    @GetMapping("/welcome")
     public String displayResult(HttpServletRequest request, Model model) {
 
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findByEmail(principal.getName());
-        model.addAttribute("newUser", user);
+        model.addAttribute("user", user);
 
         return "welcome";
     }

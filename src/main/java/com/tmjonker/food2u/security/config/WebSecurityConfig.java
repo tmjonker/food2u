@@ -35,14 +35,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         , "/css/style.css"
                         , "/scripts/scripts.js"
                         , "/images/*").permitAll()
-                .antMatchers("/result").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/sign-in")
-                .permitAll()
+                .loginPage("/sign-in").permitAll()
+                .defaultSuccessUrl("/welcome", true)
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/sign-in");
     }
 
     @Bean

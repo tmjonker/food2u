@@ -36,6 +36,9 @@ public class SignUpController {
     public String signUpSubmit(@ModelAttribute @Valid NewUserForm newUserForm, BindingResult bindingResult,
                                Model model, RedirectAttributes redirectAttributes) {
 
+        /* validates input by checking to see if password1 matches password2. Also checks if the email entered is already
+        associated with an existing user, and if all fields are adequately filled in.
+         */
         if (!newUserForm.getPassword().equals(newUserForm.getPassword2())) {
             newUserForm.setPasswordsMatch(false);
             return "sign-up";

@@ -29,6 +29,7 @@ public class SignInController {
     @PostMapping("/sign-in")
     public String signInSubmit(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
 
+        model.addAttribute("newUser", returningUserForm);
         return "result";
     }
 }

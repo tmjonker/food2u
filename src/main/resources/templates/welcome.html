@@ -23,7 +23,7 @@
         <header id="navigation" th:fragment="header">
 
             <nav class="navbar navbar-expand-lg fixed-top">
-                <a href="/"><span class="navbar-brand">Food2u</span></a>
+                <a href="/welcome"><span class="navbar-brand">Food2u</span></a>
                 <button class="navbar-toggler collapsed navbar-dark" type="button" data-toggle="collapse"
                     data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -32,7 +32,7 @@
                 <div class="navbar-collapse collapse" id="navbarCollapse" style="">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link link main-link" href="/sign-in">Home</a>
+                            <a class="nav-link link main-link" href="/welcome">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link link main-link" href="/sign-up">Delivery</a>
@@ -48,10 +48,12 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <p th:text="${user.firstName} "></p><i class="fas fa-user-circle"></i>
+                                <i class="fas fa-user-circle"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg-right"
                                 aria-labelledby="navbarDropdown">
+                                <p class="dropdown-item dropdown-header" th:inline="text">[[${user.firstName}]] [[${user.lastName}]]</p>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item link" href="#">My Account</a>
                                 <a class="dropdown-item link" href="#">Past Orders</a>
                                 <div class="dropdown-divider"></div>
@@ -64,13 +66,12 @@
         </header>
 
         <section id="main-content">
-            <div class="jumbotron jumbotron-fluid">
+            <div class="jumbotron jumbotron-fluid jumbotron-header">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 th:inline="text">Welcome, [[${user.firstName}]]!</h1>
-                            <br>
-                            <h3>Feeling Hungry?</h3>
+                            <h3 class="jumbotron-subheader">Feeling Hungry?</h3>
                         </div>
                     </div>
                 </div>

@@ -43,6 +43,14 @@ p {
     color: #d6e0f0;
 }
 
+.dropdown-header {
+    color: #f1f3f8;
+}
+
+.dropdown-header:hover {
+    color: #f1f3f8;
+}
+
 .dropdown-menu {
     background-color: #393b44;
 }

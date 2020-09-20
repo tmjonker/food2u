@@ -19,7 +19,7 @@ signupForm.addEventListener("submit", function (event) {
 
 password1.addEventListener("input", function (event) {
     if (password1.validity.patternMismatch) {
-        password1.setCustomValidity("Must be atleast 6 characters, contain 1 uppercase letter, 1 lowercase letter, 1 symbol, and 1 number");
+        password1.setCustomValidity("Must be atleast 8 characters, contain 1 uppercase letter, 1 lowercase letter, 1 symbol, and 1 number");
         password1.reportValidity();
     } else {
         password1.setCustomValidity("");

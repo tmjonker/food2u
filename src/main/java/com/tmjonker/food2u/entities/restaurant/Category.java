@@ -21,5 +21,19 @@ public enum Category {
         public String toString() {
             return "Mexican";
         }
+    },
+
+    PIZZA {
+        @Override
+        public String toString() {
+            return "Pizza";
+        }
+    },
+
+    BURGERS {
+        @Override
+        public String toString() {
+            return "Burgers";
+        }
     }
 }
