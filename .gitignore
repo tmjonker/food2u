@@ -6,7 +6,6 @@ target/
 !**/src/test/**/target/
 food2u-log.log
 food2u-log.log.lck
-application.properties
 
 ### STS ###
 .apt_generated
