@@ -49,8 +49,8 @@ public class SignUpController {
             if (!userRepository.existsByEmail(newUser.getEmail())) {
                 newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
                 userRepository.save(newUser);
-                model.addAttribute("newUser", newUser);
-                return "result";
+                model.addAttribute("user", newUser);
+                return "welcome";
             } else {
                 ReturningUserForm returningUserForm = new ReturningUserForm(newUser.getEmail(), true);
                 redirectAttributes.addFlashAttribute("returningUserForm", returningUserForm);

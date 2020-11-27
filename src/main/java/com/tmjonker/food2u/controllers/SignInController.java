@@ -8,10 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.support.RequestContextUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SignInController {
@@ -23,13 +20,14 @@ public class SignInController {
     public String signInform(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
 
         model.addAttribute("returningUser", returningUserForm);
-        return "sign-in";
+
+            return "sign-in";
     }
 
     @PostMapping("/sign-in")
     public String signInSubmit(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
 
-        model.addAttribute("newUser", returningUserForm);
-        return "result";
+        model.addAttribute("user", returningUserForm);
+        return "welcome";
     }
 }

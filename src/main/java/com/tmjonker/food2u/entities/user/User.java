@@ -19,24 +19,33 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @NotNull
     private String email;
+
     @NotNull
     private String password;
+
     @NotNull
     private String firstName;
     private String middleInitial;
+
     @NotNull
     private String lastName;
+
     @NotNull
     private String address;
     private String address2;
+
     @NotNull
     private String city;
+
     @NotNull
     private String state;
+
     @NotNull
     private String zipCode;
+
     @NotNull
     private String role;
 
