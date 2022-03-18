@@ -1,6 +1,8 @@
 package com.tmjonker.food2u.entities.restaurant;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -8,6 +10,7 @@ import javax.validation.constraints.NotNull;
 public class Restaurant {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotNull
     private String name;
@@ -21,9 +24,24 @@ public class Restaurant {
     @NotNull
     private String zipCode;
     @NotNull
+    private String phoneNumber;
+    @NotNull
     private String category;
     @NotNull
     private String imgPath;
+
+    public Restaurant(String name, String address, String address2, String city, String state, String zipCode,
+                      String phoneNumber, String category, String imgPath) {
+        this.name = name;
+        this.address = address;
+        this.address2 = address2;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.phoneNumber = phoneNumber;
+        this.category = category;
+        this.imgPath = imgPath;
+    }
 
     public void setState(String state) {
         this.state = state;
@@ -83,6 +101,14 @@ public class Restaurant {
 
     public String getZipCode() {
         return zipCode;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setCategory(String category) {
