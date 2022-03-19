@@ -6,5 +6,12 @@ public enum Role {
         public String toString() {
             return "USER";
         }
+    },
+
+    ADMIN {
+        @Override
+        public String toString() {
+            return "ADMIN";
+        }
     }
 }

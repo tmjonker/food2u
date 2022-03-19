@@ -65,7 +65,11 @@ public class User implements UserDetails {
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
-        role = Role.USER.name();
+
+        if (email.contains("admin@food2u.com"))
+            role = Role.ADMIN.name();
+        else
+            role = Role.USER.name();
     }
 
     public Integer getId() {

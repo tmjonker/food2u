@@ -55,13 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/sign-in?logout")
                 .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .and()
-                .rememberMe()
-                .rememberMeCookieName("remember-me")
-                .tokenRepository(persistentTokenRepository())
-                .and()
-                .csrf().disable();
+                .permitAll();
     }
 
     @Bean
