@@ -1,13 +1,19 @@
 package com.tmjonker.food2u.controllers;
 
+import com.tmjonker.food2u.entities.user.ChangePasswordForm;
 import com.tmjonker.food2u.entities.user.ReturningUserForm;
+import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.entities.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 public class ChangePasswordController {
@@ -15,18 +21,37 @@ public class ChangePasswordController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/change_password")
-    public String signInform(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-        model.addAttribute("returningUser", returningUserForm);
+    @GetMapping("/change_password")
+    public String signInform(@ModelAttribute ChangePasswordForm changePasswordForm, HttpServletRequest request, Model model) {
+
+        Principal principal = request.getUserPrincipal();
+        User returningUser = userRepository.findByEmail(principal.getName());
+
+        model.addAttribute("changePasswordForm", changePasswordForm);
+        model.addAttribute("user", returningUser);
 
         return "change_password";
     }
 
     @PostMapping("/change_password")
-    public String signInSubmit(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
+    public String signInSubmit(@ModelAttribute ChangePasswordForm changePasswordForm, Model model) {
 
-        model.addAttribute("user", returningUserForm);
-        return "welcome";
+        User returningUser = userRepository.findByEmail(changePasswordForm.getUsername());
+
+        if (!changePasswordForm.getPassword1().equals(changePasswordForm.getPassword2())) {
+            changePasswordForm.setPasswordsMatch(false);
+            model.addAttribute("user", returningUser);
+            model.addAttribute("changePasswordForm", changePasswordForm);
+            return "change_password";
+        } else {
+            returningUser.setPassword(passwordEncoder.encode(changePasswordForm.getPassword1()));
+            userRepository.save(returningUser);
+            model.addAttribute("user", returningUser);
+            model.addAttribute("changePasswordForm", changePasswordForm);
+            return "admin";
+        }
     }
 }
