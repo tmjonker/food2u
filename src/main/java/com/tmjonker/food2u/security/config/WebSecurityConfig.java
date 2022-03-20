@@ -46,16 +46,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/sign-in").permitAll()
+                .loginPage("/sign-in")
+                .permitAll()
                 .defaultSuccessUrl("/welcome", true)
                 .and()
                 .httpBasic()
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/sign-in?logout")
                 .invalidateHttpSession(true)
-                .permitAll();
+                .permitAll()
+                .and()
+                .csrf().disable();
     }
 
     @Bean

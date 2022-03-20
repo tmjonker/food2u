@@ -49,6 +49,9 @@ public class User implements UserDetails {
     @NotNull
     private String role;
 
+    @NotNull
+    private int logins;
+
     public User() {
         role = Role.USER.name();
     }
@@ -65,6 +68,7 @@ public class User implements UserDetails {
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
+        logins = 0;
 
         if (email.contains("admin@food2u.com"))
             role = Role.ADMIN.name();
@@ -162,6 +166,14 @@ public class User implements UserDetails {
 
     public void setRole(Role role) {
         this.role = role.name();
+    }
+
+    public int getLogins() {
+        return logins;
+    }
+
+    public void setLogins(int logins) {
+        this.logins = logins;
     }
 
     @Override

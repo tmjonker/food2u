@@ -23,7 +23,7 @@ public class AdminController {
 
         model.addAttribute("returningUser", returningUserForm);
 
-        return "sign-in";
+        return "admin";
     }
 
     @PostMapping("/admin")

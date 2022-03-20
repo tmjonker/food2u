@@ -21,8 +21,18 @@ public class WelcomeController {
 
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findByEmail(principal.getName());
+        user.setLogins(user.getLogins() + 1);
+        userRepository.save(user);
         model.addAttribute("user", user);
 
-        return "welcome";
+        if (user.getRole().equals("ADMIN")) {
+            if (user.getLogins() == 1)
+                return "redirect:/change_password";
+            else
+                return "redirect:/admin";
+        } else {
+            model.addAttribute("user", user);
+            return "welcome";
+        }
     }
 }
