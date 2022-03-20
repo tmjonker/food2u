@@ -27,7 +27,7 @@ public class WelcomeController {
 
         if (user.getRole().equals("ADMIN")) {
             if (user.getLogins() == 1)
-                return "redirect:/change_password";
+                return "redirect:/change_password_admin";
             else
                 return "redirect:/admin";
         } else {

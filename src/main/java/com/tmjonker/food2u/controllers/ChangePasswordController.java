@@ -24,7 +24,7 @@ public class ChangePasswordController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/change_password")
+    @GetMapping("/change_password_admin")
     public String signInform(@ModelAttribute ChangePasswordForm changePasswordForm, HttpServletRequest request, Model model) {
 
         Principal principal = request.getUserPrincipal();
@@ -33,10 +33,10 @@ public class ChangePasswordController {
         model.addAttribute("changePasswordForm", changePasswordForm);
         model.addAttribute("user", returningUser);
 
-        return "change_password";
+        return "change_password_admin";
     }
 
-    @PostMapping("/change_password")
+    @PostMapping("/change_password_admin")
     public String signInSubmit(@ModelAttribute ChangePasswordForm changePasswordForm, Model model) {
 
         User returningUser = userRepository.findByEmail(changePasswordForm.getUsername());
@@ -45,7 +45,7 @@ public class ChangePasswordController {
             changePasswordForm.setPasswordsMatch(false);
             model.addAttribute("user", returningUser);
             model.addAttribute("changePasswordForm", changePasswordForm);
-            return "change_password";
+            return "change_password_admin";
         } else {
             returningUser.setPassword(passwordEncoder.encode(changePasswordForm.getPassword1()));
             userRepository.save(returningUser);
