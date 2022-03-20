@@ -51,7 +51,7 @@ public class ChangePasswordController {
             userRepository.save(returningUser);
             model.addAttribute("user", returningUser);
             model.addAttribute("changePasswordForm", changePasswordForm);
-            return "admin";
+            return "redirect:/admin";
         }
     }
 }

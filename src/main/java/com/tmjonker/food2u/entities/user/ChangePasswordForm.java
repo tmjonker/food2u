@@ -6,6 +6,7 @@ public class ChangePasswordForm {
     private String password1;
     private String password2;
     private boolean passwordsMatch;
+    private boolean passwordChanged;
 
     public ChangePasswordForm(String username, String password1, String password2) {
 
@@ -13,6 +14,7 @@ public class ChangePasswordForm {
         this.password1 = password1;
         this.password2 = password2;
         passwordsMatch = true;
+        passwordChanged = false;
     }
 
     public String getUsername() {
@@ -47,5 +49,13 @@ public class ChangePasswordForm {
 
     public boolean getPasswordsMatch() {
         return passwordsMatch;
+    }
+
+    public void setPasswordChanged(boolean passwordChanged) {
+        this.passwordChanged = passwordChanged;
+    }
+
+    public boolean getPasswordChanged() {
+        return passwordChanged;
     }
 }
