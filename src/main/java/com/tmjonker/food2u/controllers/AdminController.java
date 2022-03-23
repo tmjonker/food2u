@@ -1,8 +1,6 @@
 package com.tmjonker.food2u.controllers;
 
 import com.tmjonker.food2u.entities.restaurant.NewRestaurantForm;
-import com.tmjonker.food2u.entities.restaurant.RestaurantRepository;
-import com.tmjonker.food2u.entities.user.NewUserForm;
 import com.tmjonker.food2u.entities.user.ReturningUserForm;
 import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.entities.user.UserRepository;
@@ -23,7 +21,8 @@ public class AdminController {
     private UserRepository userRepository;
 
     @GetMapping("/admin")
-    public String signInform(HttpServletRequest request, Model model) {
+    public String signInform(HttpServletRequest request, @ModelAttribute NewRestaurantForm newRestaurantForm,
+                             Model model) {
 
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findByEmail(principal.getName());
@@ -31,7 +30,6 @@ public class AdminController {
         userRepository.save(user);
 
         model.addAttribute("user", user);
-
         return "admin";
     }
 
@@ -39,6 +37,7 @@ public class AdminController {
     public String signInSubmit(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
 
         model.addAttribute("user", returningUserForm);
+
         return "welcome";
     }
 }

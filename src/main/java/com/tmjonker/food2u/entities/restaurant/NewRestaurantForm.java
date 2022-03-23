@@ -25,6 +25,7 @@ public class NewRestaurantForm {
     @Pattern(regexp="\\d{5,}")
     private String zipCode;
     @NotNull
+    @Size(min=12)
     @Pattern(regexp="^\\d{3}-\\d{3}-\\d{4}$")
     private String phoneNumber;
     @NotNull

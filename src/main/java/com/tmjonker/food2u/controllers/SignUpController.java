@@ -28,7 +28,7 @@ public class SignUpController {
 
     @GetMapping("/sign-up")
     public String signUpForm(@ModelAttribute NewUserForm newUserForm, Model model) {
-        model.addAttribute("newUserForm", newUserForm);
+
         return "sign-up";
     }
 
