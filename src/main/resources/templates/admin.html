@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-auto col-md-auto col-sm-auto form-col">
-                    <h3 class="sign-in-header">Sign up for a new account</h3>
+                    <h3 class="sign-in-header">Add new restaurant</h3>
                     <form class="lusu-form" id="sign-up" th:action="@{/admin}" th:object="${newRestaurantForm}" method="post">
                         <ul class="form-error" th:if="${#fields.hasErrors('*')}">
                             <li th:if="${#fields.hasErrors('name')}">Restaurant name is too short.</li>
@@ -153,8 +153,7 @@
                                        required>
                             </div>
                         </div>
-                        <button type="submit" id="submitButton" class="btn btn-dark submit-button">Sign
-                            up</button>
+                        <button type="submit" id="submitButton" class="btn btn-dark submit-button">Add Restaurant</button>
                     </form>
                 </div>
             </div>
