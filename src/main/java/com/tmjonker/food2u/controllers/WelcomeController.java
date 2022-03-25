@@ -17,7 +17,7 @@ public class WelcomeController {
     private UserRepository userRepository;
 
     @GetMapping("/welcome")
-    public String displayResult(HttpServletRequest request, Model model) {
+    public String welcomeForm(HttpServletRequest request, Model model) {
 
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findByEmail(principal.getName());

@@ -21,7 +21,7 @@ public class AdminController {
     private UserRepository userRepository;
 
     @GetMapping("/admin")
-    public String signInform(HttpServletRequest request, @ModelAttribute NewRestaurantForm newRestaurantForm,
+    public String adminForm(HttpServletRequest request, @ModelAttribute NewRestaurantForm newRestaurantForm,
                              Model model) {
 
         Principal principal = request.getUserPrincipal();
@@ -34,9 +34,9 @@ public class AdminController {
     }
 
     @PostMapping("/admin")
-    public String signInSubmit(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
+    public String adminSubmit(@ModelAttribute NewRestaurantForm newRestaurantForm, Model model) {
 
-        model.addAttribute("user", returningUserForm);
+        model.addAttribute("user", newRestaurantForm);
 
         return "welcome";
     }
