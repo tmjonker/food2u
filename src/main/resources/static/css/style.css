@@ -195,6 +195,15 @@ p {
     padding: 10px;
 }
 
+.form-success {
+    text-align: center;
+    background-color: green;
+    overflow: auto;
+    color: #f1f3f8;
+    margin: 0 auto 42px;
+    padding: 10px;
+}
+
 input[type=checkbox] {
     transform: scale(1.25);
 }

@@ -3,9 +3,10 @@ package com.tmjonker.food2u.entities.restaurant;
 import com.tmjonker.food2u.entities.user.User;
 import org.springframework.data.repository.CrudRepository;
 
-public interface RestaurantRepository extends CrudRepository<User, Integer> {
+public interface RestaurantRepository extends CrudRepository<Restaurant, Integer> {
 
-    boolean existsByEmail(String email);
+    boolean existsByNameAndPhoneNumber(String name, String phoneNumber);
 
-    User findByEmail(String email);
+    Restaurant findByNameAndPhoneNumber(String name, String phoneNumber);
+
 }

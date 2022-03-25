@@ -1,6 +1,8 @@
 package com.tmjonker.food2u.controllers;
 
 import com.tmjonker.food2u.entities.restaurant.NewRestaurantForm;
+import com.tmjonker.food2u.entities.restaurant.Restaurant;
+import com.tmjonker.food2u.entities.restaurant.RestaurantRepository;
 import com.tmjonker.food2u.entities.user.ReturningUserForm;
 import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.entities.user.UserRepository;
@@ -11,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -20,6 +23,9 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
     @GetMapping("/admin")
     public String adminForm(HttpServletRequest request, @ModelAttribute NewRestaurantForm newRestaurantForm,
@@ -35,11 +41,33 @@ public class AdminController {
     }
 
     @PostMapping("/admin")
-    public String adminSubmit(@ModelAttribute NewRestaurantForm newRestaurantForm, BindingResult bindingResult,
-                              Model model) {
+    public String adminSubmit(@ModelAttribute NewRestaurantForm newRestaurantForm, @ModelAttribute User user,
+                              BindingResult bindingResult, Model model,
+                              @RequestParam(name="success", required = false, defaultValue = "false") String success,
+                              @RequestParam(name="exists", required = false, defaultValue = "false") String exists) {
 
-        model.addAttribute("user", newRestaurantForm);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("user", user);
+            return "admin";
+        } else {
+            Restaurant newRestaurant = newRestaurantForm.toRestaurant();
+            if (!restaurantRepository.existsByNameAndPhoneNumber(newRestaurant.getName(),
+                    newRestaurant.getPhoneNumber())) {
+                restaurantRepository.save(newRestaurant);
+                model.addAttribute("user", user);
+                return "redirect:admin?success=true";
+            } else {
+                model.addAttribute("newRestaurantForm", newRestaurantForm);
+                model.addAttribute("user", user);
+                return "redirect:admin?exists=true";
+            }
+        }
+    }
 
-        return "welcome";
+    @GetMapping({"/admin?success", "/admin?exists"})
+    public String adminSuccessSubmit(@ModelAttribute NewRestaurantForm newRestaurantForm, @ModelAttribute User user,
+                                     @RequestParam String id, Model model) {
+        model.addAttribute("user", user);
+        return "admin";
     }
 }

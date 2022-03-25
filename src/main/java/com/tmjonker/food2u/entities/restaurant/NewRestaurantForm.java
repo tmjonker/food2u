@@ -34,6 +34,7 @@ public class NewRestaurantForm {
     @NotNull
     @Size(min=2)
     private String imgPath;
+    private boolean alreadyExists;
 
     public NewRestaurantForm() {
 
