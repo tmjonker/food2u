@@ -16,7 +16,7 @@
                         <h3 class="sign-in-header">Sign in to your account</h3>
                         <form class="lusu-form" id="sign-in" th:action="@{/sign-in}" th:object="${returningUser}" method="post">
                             <p class="form-error" th:inline="text" th:if="${returningUser.alreadyExists}">
-                                Account with email [[${returningUserForm.email}]] already exists. Please sign in.
+                                Account with email [[${returningUserForm.username}]] already exists. Please sign in.
                             </p>
                             <p class="form-error" th:inline="text" th:if="${param.error}">
                                 The username and password combination entered returned no results. Please try again.
