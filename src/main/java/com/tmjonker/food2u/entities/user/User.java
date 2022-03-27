@@ -47,6 +47,9 @@ public class User implements UserDetails {
     private String zipCode;
 
     @NotNull
+    private String phoneNumber;
+    
+    @NotNull
     private String role;
 
     @NotNull
@@ -57,7 +60,7 @@ public class User implements UserDetails {
     }
 
     public User(String email, String password, String firstName, String middleInitial, String lastName,
-                String address, String address2, String city, String state, String zipCode) {
+                String address, String address2, String city, String state, String zipCode, String phoneNumber) {
         this.email = email;
         this. password = password;
         this.firstName = firstName;
@@ -68,6 +71,7 @@ public class User implements UserDetails {
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
+        this.phoneNumber = phoneNumber;
         logins = 0;
 
         if (email.contains("admin@food2u.com"))
@@ -94,6 +98,10 @@ public class User implements UserDetails {
 
     public String getZipCode() {
         return zipCode;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setZipCode(String zipCode) {
@@ -158,6 +166,10 @@ public class User implements UserDetails {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getRole() {

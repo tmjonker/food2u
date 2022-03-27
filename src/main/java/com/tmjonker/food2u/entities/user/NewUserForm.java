@@ -33,6 +33,9 @@ public class NewUserForm {
     @NotNull
     @Pattern(regexp="\\d{5,}")
     private String zipCode;
+    @NotNull
+    @Pattern(regexp="^\\d{3}-\\d{3}-\\d{4}$")
+    private String phoneNumber;
     private Boolean passwordsMatch;
 
     public NewUserForm() {
@@ -83,6 +86,10 @@ public class NewUserForm {
         return state;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     public void setAddress2(String address2) {
         this.address2 = address2;
     }
@@ -97,6 +104,10 @@ public class NewUserForm {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setFirstName(String firstName) {
@@ -136,6 +147,7 @@ public class NewUserForm {
     }
 
     public User toUser() {
-        return new User(email, password, firstName, middleInitial, lastName, address, address2, city, state, zipCode);
+        return new User(email, password, firstName, middleInitial, lastName, address, address2, city,
+                state, zipCode, phoneNumber);
     }
 }

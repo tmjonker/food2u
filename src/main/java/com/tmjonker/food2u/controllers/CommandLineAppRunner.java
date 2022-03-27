@@ -22,7 +22,7 @@ public class CommandLineAppRunner implements CommandLineRunner {
 
         if (!userRepository.existsByEmail("admin@food2u.com")) {
             User adminUser = new User("admin@food2u.com", passwordEncoder.encode("password"), "tim", "m"
-                    , "jonker", "123 Main st.", "n/a", "manassas", "VA", "20110");
+                    , "jonker", "123 Main st.", "n/a", "manassas", "VA", "20110", "777-777-7777");
             userRepository.save(adminUser);
         }
     }

@@ -69,17 +69,19 @@
                                 <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
                                     th:field="*{address}" required>
                             </div>
-                            <div class="form-group">
-                                <label for="inputAddress2">Address 2</label>
-                                <input type="text" class="form-control" id="inputAddress2"
-                                    placeholder="Apartment, studio, or floor" th:field="*{address2}">
-                            </div>
                             <div class="form-row">
-                                <div class="form-group col-md-5 col-sm-5">
+                                <div class="form-group col-md-6 col-sm-6">
+                                    <label for="inputAddress2">Address 2</label>
+                                    <input type="text" class="form-control" id="inputAddress2"
+                                        placeholder="Apartment, studio, or floor" th:field="*{address2}">
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6">
                                     <label for="inputCity">City</label>
                                     <input type="text" class="form-control" id="inputCity" th:field="*{city}" required>
                                 </div>
-                                <div class="form-group col-md-3 col-sm-3">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4 col-sm-4">
                                     <label for="inputState">State</label>
                                     <select id="inputState" class="form-control" th:field="*{state}" required>
                                         <option value="">Please Select</option>
@@ -140,6 +142,14 @@
                                     <label for="inputZip">Zip</label>
                                     <input type="text" class="form-control" id="inputZip" th:field="*{zipCode}"
                                         required>
+                                </div>
+                                <div class="form-group col-md-4 col-sm-4">
+                                    <label for="inputPhoneNumber">Phone Number</label>
+                                    <input type="text" class="form-control" id="inputPhoneNumber"
+                                           th:field="*{phoneNumber}" pattern ="^\d{3}-\d{3}-\d{4}$"
+                                           oninvalid="setCustomValidity('Phone Number must be in ###-###-#### fomat')"
+                                           onchange="try{setCustomValidity('')}catch(e){}"
+                                           required>
                                 </div>
                             </div>
                             <div class="form-group col-lg-auto text-center">
