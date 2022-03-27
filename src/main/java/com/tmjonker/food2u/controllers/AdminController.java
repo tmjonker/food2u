@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
 
 @Controller
 public class AdminController {
@@ -59,6 +63,10 @@ public class AdminController {
             } else {
                 model.addAttribute("newRestaurantForm", newRestaurantForm);
                 model.addAttribute("user", user);
+
+                ArrayList words = new ArrayList<>(Arrays.asList("Hello", "World"));
+
+                Function<Integer, Integer> squareLamba = x -> x*x;
                 return "redirect:admin?exists=true";
             }
         }

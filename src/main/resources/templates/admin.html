@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-lg-auto col-md-auto col-sm-auto form-col">
                     <h3 class="sign-in-header">Add new restaurant</h3>
-                    <form class="lusu-form" id="sign-up" th:action="@{/admin}" th:object="${newRestaurantForm}" method="post">
+                    <form class="lusu-form" id="new-restaurant" th:action="@{/admin}" th:object="${newRestaurantForm}" method="post">
                         <p class="form-error" th:inline="text" th:if="${param.exists}">
                             Restaurant already exists.
                         </p>
@@ -142,6 +142,9 @@
                             <div class="form-group col-md-4 col-sm-4">
                                 <label for="inputPhoneNumber">Phone Number</label>
                                 <input type="text" class="form-control" id="inputPhoneNumber" th:field="*{phoneNumber}"
+                                       pattern ="^\d{3}-\d{3}-\d{4}$"
+                                       oninvalid="setCustomValidity('Phone Number must be in ###-###-#### fomat')"
+                                       onchange="try{setCustomValidity('')}catch(e){}"
                                        required>
                             </div>
                             <div class="form-group col-md-4 col-sm-4">
@@ -185,7 +188,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
 </script>
-<script th:src="@{scripts/cpa_script.js}"></script>
 </body>
 
 </html>
