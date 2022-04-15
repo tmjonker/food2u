@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SignInController {
 
-    @Autowired
-    private UserRepository userRepository;
-
     @GetMapping("/sign-in")
     public String signInform(@ModelAttribute ReturningUserForm returningUserForm, Model model) {
 

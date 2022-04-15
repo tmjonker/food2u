@@ -4,7 +4,10 @@ import com.tmjonker.food2u.entities.user.ChangePasswordForm;
 import com.tmjonker.food2u.entities.user.ReturningUserForm;
 import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.entities.user.UserRepository;
+import com.tmjonker.food2u.security.services.DatabaseUserDetailsPasswordService;
+import com.tmjonker.food2u.security.services.DatabaseUserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,10 @@ public class ChangePasswordController {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private DatabaseUserDetailsPasswordService passwordService;
+
+    @Autowired
+    private DatabaseUserServiceDetails userServiceDetails;
 
     @GetMapping("/change_password_admin")
     public String cpaForm(@ModelAttribute ChangePasswordForm changePasswordForm, HttpServletRequest request, Model model) {
@@ -47,8 +53,9 @@ public class ChangePasswordController {
             model.addAttribute("changePasswordForm", changePasswordForm);
             return "change_password_admin";
         } else {
-            returningUser.setPassword(passwordEncoder.encode(changePasswordForm.getPassword1()));
-            userRepository.save(returningUser);
+
+            UserDetails userDetails = userServiceDetails.loadUserByUsername(returningUser.getEmail());
+            passwordService.updatePassword(userDetails, changePasswordForm.getPassword1());
             model.addAttribute("user", returningUser);
             model.addAttribute("changePasswordForm", changePasswordForm);
             return "redirect:/admin";

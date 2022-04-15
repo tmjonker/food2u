@@ -6,6 +6,8 @@ target/
 !**/src/test/**/target/
 food2u-log.log
 food2u-log.log.lck
+.gitignore
+
 
 ### STS ###
 .apt_generated
