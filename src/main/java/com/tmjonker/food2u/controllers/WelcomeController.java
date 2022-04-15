@@ -15,7 +15,6 @@ public class WelcomeController {
 
     private UserRepository userRepository;
 
-    @Autowired
     public WelcomeController(UserRepository userRepository) {
 
         this.userRepository = userRepository;

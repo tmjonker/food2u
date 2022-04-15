@@ -25,7 +25,6 @@ public class SignUpController {
 
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
     public SignUpController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;

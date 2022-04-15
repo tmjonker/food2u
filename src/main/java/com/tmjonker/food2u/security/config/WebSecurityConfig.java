@@ -34,7 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
 
     @Lazy
-    @Autowired
     public WebSecurityConfig(DatabaseUserServiceDetails userDetailsService, DatabaseUserDetailsPasswordService passwordService,
                              DataSource dataSource) {
 
@@ -51,9 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/"
                         , "/home"
                         , "/restaurants"
+                        , "/restaurants/*"
                         , "/sign-up"
                         , "/css/style.css"
-                        , "/scripts/scripts.js"
+                        , "/scripts/*"
                         , "/images/*").permitAll()
                 .anyRequest().authenticated()
                 .and()

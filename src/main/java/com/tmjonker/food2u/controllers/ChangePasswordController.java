@@ -27,7 +27,6 @@ public class ChangePasswordController {
 
     private DatabaseUserServiceDetails userServiceDetails;
 
-    @Autowired
     public ChangePasswordController (UserRepository userRepository, DatabaseUserDetailsPasswordService passwordService,
                                      DatabaseUserServiceDetails userServiceDetails) {
 

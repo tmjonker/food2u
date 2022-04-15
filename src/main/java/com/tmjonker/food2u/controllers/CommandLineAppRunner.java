@@ -14,7 +14,6 @@ public class CommandLineAppRunner implements CommandLineRunner {
 
     PasswordEncoder passwordEncoder;
 
-    @Autowired
     public CommandLineAppRunner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 
         this.userRepository = userRepository;
