@@ -10,12 +10,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandLineAppRunner implements CommandLineRunner {
 
-    @Autowired
     UserRepository userRepository;
 
-    @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    public CommandLineAppRunner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public void run(String... args) throws Exception {

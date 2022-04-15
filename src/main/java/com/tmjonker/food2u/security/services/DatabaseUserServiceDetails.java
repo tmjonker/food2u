@@ -11,10 +11,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DatabaseUserServiceDetails implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
 
     private User user;
+
+    @Autowired
+    public DatabaseUserServiceDetails(UserRepository userRepository) {
+
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email)

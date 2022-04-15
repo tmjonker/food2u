@@ -3,11 +3,13 @@ package com.tmjonker.food2u.security.config;
 import com.tmjonker.food2u.security.services.DatabaseUserDetailsPasswordService;
 import com.tmjonker.food2u.security.services.DatabaseUserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -15,7 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -24,15 +25,21 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private DatabaseUserServiceDetails databaseUserDetailsService;
+    private DatabaseUserServiceDetails userDetailsService;
 
-    @Autowired
-    private DatabaseUserDetailsPasswordService databaseUserDetailPasswordService;
+    private DatabaseUserDetailsPasswordService passwordService;
 
     // Factory for connection to database.
-    @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    public WebSecurityConfig(DatabaseUserServiceDetails userDetailsService, DatabaseUserDetailsPasswordService passwordService,
+                             DataSource dataSource) {
+
+        this.userDetailsService = userDetailsService;
+        this.passwordService = passwordService;
+        this.dataSource = dataSource;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -87,8 +94,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsPasswordService(
-                this.databaseUserDetailPasswordService);
-        provider.setUserDetailsService(this.databaseUserDetailsService);
+                this.passwordService);
+        provider.setUserDetailsService(this.userDetailsService);
         return provider;
     }
 
@@ -96,5 +103,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    public void setApplicationContext(ApplicationContext context) {
+        super.setApplicationContext(context);
+        AuthenticationManagerBuilder globalAuthBuilder = context
+                .getBean(AuthenticationManagerBuilder.class);
+        try {
+            globalAuthBuilder.userDetailsService(userDetailsService);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

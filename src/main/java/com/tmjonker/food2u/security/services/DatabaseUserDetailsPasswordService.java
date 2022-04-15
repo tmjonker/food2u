@@ -14,11 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class DatabaseUserDetailsPasswordService
         implements UserDetailsPasswordService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    public DatabaseUserDetailsPasswordService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public UserDetails updatePassword(UserDetails userDetails, String newPassword) {

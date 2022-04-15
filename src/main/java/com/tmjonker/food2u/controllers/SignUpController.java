@@ -21,10 +21,15 @@ public class SignUpController {
 
     private static final Logger LOGGER = Food2uLogger.setUp(SignUpController.class.getName());
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
+
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public SignUpController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/sign-up")
     public String signUpForm(@ModelAttribute NewUserForm newUserForm, Model model) {

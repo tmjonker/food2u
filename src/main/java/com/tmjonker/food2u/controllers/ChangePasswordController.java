@@ -21,14 +21,20 @@ import java.security.Principal;
 @Controller
 public class ChangePasswordController {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     private DatabaseUserDetailsPasswordService passwordService;
 
-    @Autowired
     private DatabaseUserServiceDetails userServiceDetails;
+
+    @Autowired
+    public ChangePasswordController (UserRepository userRepository, DatabaseUserDetailsPasswordService passwordService,
+                                     DatabaseUserServiceDetails userServiceDetails) {
+
+        this.userRepository = userRepository;
+        this.passwordService = passwordService;
+        this.userServiceDetails = userServiceDetails;
+    }
 
     @GetMapping("/change_password_admin")
     public String cpaForm(@ModelAttribute ChangePasswordForm changePasswordForm, HttpServletRequest request, Model model) {

@@ -25,11 +25,17 @@ import java.util.function.Function;
 @Controller
 public class AdminController {
 
-    @Autowired
+
     private UserRepository userRepository;
 
-    @Autowired
     private RestaurantRepository restaurantRepository;
+
+    @Autowired
+    public AdminController(UserRepository userRepository, RestaurantRepository restaurantRepository) {
+
+        this.userRepository = userRepository;
+        this.restaurantRepository = restaurantRepository;
+    }
 
     @GetMapping("/admin")
     public String adminForm(HttpServletRequest request, @ModelAttribute NewRestaurantForm newRestaurantForm,

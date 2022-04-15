@@ -13,8 +13,13 @@ import java.security.Principal;
 @Controller
 public class WelcomeController {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public WelcomeController(UserRepository userRepository) {
+
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/welcome")
     public String welcomeForm(HttpServletRequest request, Model model) {
