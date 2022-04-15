@@ -30,6 +30,10 @@ public class Restaurant {
     @NotNull
     private String imgPath;
 
+    public Restaurant() {
+
+    }
+
     public Restaurant(String name, String address, String address2, String city, String state, String zipCode,
                       String phoneNumber, String category, String imgPath) {
         this.name = name;

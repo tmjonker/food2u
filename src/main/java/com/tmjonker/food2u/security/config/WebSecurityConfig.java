@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -32,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // Factory for connection to database.
     private DataSource dataSource;
 
+    @Lazy
     @Autowired
     public WebSecurityConfig(DatabaseUserServiceDetails userDetailsService, DatabaseUserDetailsPasswordService passwordService,
                              DataSource dataSource) {
@@ -48,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/"
                         , "/home"
+                        , "/restaurants"
                         , "/sign-up"
                         , "/css/style.css"
                         , "/scripts/scripts.js"

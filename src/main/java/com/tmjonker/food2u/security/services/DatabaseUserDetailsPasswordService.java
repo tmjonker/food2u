@@ -17,7 +17,7 @@ public class DatabaseUserDetailsPasswordService
     private UserRepository userRepository;
 
     private PasswordEncoder passwordEncoder;
-    
+
     @Autowired
     public DatabaseUserDetailsPasswordService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 
