@@ -14,7 +14,6 @@ public class RestaurantController {
 
     RestaurantRepository restaurantRepository;
 
-    @Autowired
     public RestaurantController(RestaurantRepository restaurantRepository) {
 
         this.restaurantRepository = restaurantRepository;

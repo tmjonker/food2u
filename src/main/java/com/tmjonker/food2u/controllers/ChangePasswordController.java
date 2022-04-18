@@ -27,6 +27,7 @@ public class ChangePasswordController {
 
     private DatabaseUserServiceDetails userServiceDetails;
 
+    @Autowired
     public ChangePasswordController (UserRepository userRepository, DatabaseUserDetailsPasswordService passwordService,
                                      DatabaseUserServiceDetails userServiceDetails) {
 
@@ -38,9 +39,11 @@ public class ChangePasswordController {
     @GetMapping("/change_password_admin")
     public String cpaForm(@ModelAttribute ChangePasswordForm changePasswordForm, HttpServletRequest request, Model model) {
 
+        // gets current logged in user.
         Principal principal = request.getUserPrincipal();
         User returningUser = userRepository.findByEmail(principal.getName());
 
+        // model attributes that are passed to the thymeleaf templates.
         model.addAttribute("changePasswordForm", changePasswordForm);
         model.addAttribute("user", returningUser);
 
@@ -54,6 +57,8 @@ public class ChangePasswordController {
 
         if (!changePasswordForm.getPassword1().equals(changePasswordForm.getPassword2())) {
             changePasswordForm.setPasswordsMatch(false);
+
+            // model attributes that are passed to the thymeleaf templates.
             model.addAttribute("user", returningUser);
             model.addAttribute("changePasswordForm", changePasswordForm);
             return "change_password_admin";
@@ -61,6 +66,8 @@ public class ChangePasswordController {
 
             UserDetails userDetails = userServiceDetails.loadUserByUsername(returningUser.getEmail());
             passwordService.updatePassword(userDetails, changePasswordForm.getPassword1());
+
+            // model attributes that are passed to the thymeleaf templates.
             model.addAttribute("user", returningUser);
             model.addAttribute("changePasswordForm", changePasswordForm);
             return "redirect:/admin";

@@ -30,10 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private DatabaseUserDetailsPasswordService passwordService;
 
-    // Factory for connection to database.
+    // Factory for connection to persistent_logins table.
     private DataSource dataSource;
 
     @Lazy
+    @Autowired
     public WebSecurityConfig(DatabaseUserServiceDetails userDetailsService, DatabaseUserDetailsPasswordService passwordService,
                              DataSource dataSource) {
 
@@ -66,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // Adds remember me functionality to sign in's.
                 .rememberMe()
                 .tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(24 * 60 * 60)
+                .tokenValiditySeconds(24 * 60 * 60) // remember-me token is valid for 24 days.
                 .rememberMeParameter("remember-me")
                 .and()
                 .httpBasic()
@@ -91,6 +92,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return tokenRepository;
     }
 
+    // sets up authentication provider for authenticating user passwords.
     @Bean
     public AuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider =
@@ -108,6 +110,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    // Configures custom userDetailsService to be used for authentication.
     @Autowired
     public void setApplicationContext(ApplicationContext context) {
         super.setApplicationContext(context);

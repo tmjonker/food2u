@@ -40,7 +40,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String adminForm(HttpServletRequest request, @ModelAttribute NewRestaurantForm newRestaurantForm,
                              Model model) {
-
+        // gets current logged in user.
         Principal principal = request.getUserPrincipal();
         User user = userRepository.findByEmail(principal.getName());
         user.setLogins(user.getLogins() + 1);

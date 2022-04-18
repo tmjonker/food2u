@@ -14,6 +14,7 @@ public class CommandLineAppRunner implements CommandLineRunner {
 
     PasswordEncoder passwordEncoder;
 
+    @Autowired
     public CommandLineAppRunner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 
         this.userRepository = userRepository;
@@ -23,6 +24,8 @@ public class CommandLineAppRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+        // initializes admin account with a default password of "password" when server is first started.
+        // Password must be changed upon initial login by admin user.  DO THIS FIRST THING.
         if (!userRepository.existsByEmail("admin@food2u.com")) {
             User adminUser = new User("admin@food2u.com", passwordEncoder.encode("password"), "tim", "m"
                     , "jonker", "123 Main st.", "n/a", "manassas", "VA", "20110", "777-777-7777");

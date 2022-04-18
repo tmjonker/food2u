@@ -25,6 +25,7 @@ public class SignUpController {
 
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
     public SignUpController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -43,19 +44,21 @@ public class SignUpController {
         /* validates input by checking to see if password1 matches password2. Also checks if the email entered is already
         associated with an existing user, and if all fields are adequately filled in.
          */
-        if (!newUserForm.getPassword().equals(newUserForm.getPassword2())) {
+        if (!newUserForm.getPassword().equals(newUserForm.getPassword2())) { // if passwords don't match, don't process the form.
             newUserForm.setPasswordsMatch(false);
             return "sign-up";
-        } else if (bindingResult.hasErrors()){
+        } else if (bindingResult.hasErrors()){ // if the form has errors as defined in template, do not process.
             return "sign-up";
         } else {
             User newUser = newUserForm.toUser();
-            if (!userRepository.existsByEmail(newUser.getEmail())) {
+            if (!userRepository.existsByEmail(newUser.getEmail())) { // if user doesn't already exist, create new user.
                 newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
                 userRepository.save(newUser);
+
+                // model attributes that are passed to the thymeleaf templates.
                 model.addAttribute("user", newUser);
                 return "welcome";
-            } else {
+            } else { // if user already exists, redirect to sign in page.
                 ReturningUserForm returningUserForm = new ReturningUserForm(newUser.getEmail(), true);
                 redirectAttributes.addFlashAttribute("returningUserForm", returningUserForm);
                 return "redirect:/sign-in";
