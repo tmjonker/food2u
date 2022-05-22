@@ -1,4 +1,4 @@
-package com.tmjonker.food2u.security.services;
+package com.tmjonker.food2u.services;
 
 import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.entities.user.UserRepository;

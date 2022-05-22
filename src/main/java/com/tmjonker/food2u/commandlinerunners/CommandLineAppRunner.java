@@ -1,4 +1,4 @@
-package com.tmjonker.food2u.controllers;
+package com.tmjonker.food2u.commandlinerunners;
 
 import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.entities.user.UserRepository;

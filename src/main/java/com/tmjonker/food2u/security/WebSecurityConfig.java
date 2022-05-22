@@ -1,7 +1,7 @@
-package com.tmjonker.food2u.security.config;
+package com.tmjonker.food2u.security;
 
-import com.tmjonker.food2u.security.services.DatabaseUserDetailsPasswordService;
-import com.tmjonker.food2u.security.services.DatabaseUserServiceDetails;
+import com.tmjonker.food2u.services.DatabaseUserDetailsPasswordService;
+import com.tmjonker.food2u.services.DatabaseUserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;

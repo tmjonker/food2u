@@ -32,7 +32,7 @@ public class SignUpController {
     }
 
     @GetMapping("/sign-up")
-    public String signUpForm(@ModelAttribute NewUserForm newUserForm, Model model) {
+    public String signUpForm() {
 
         return "sign-up";
     }

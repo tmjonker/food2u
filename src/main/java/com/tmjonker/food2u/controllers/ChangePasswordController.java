@@ -1,14 +1,12 @@
 package com.tmjonker.food2u.controllers;
 
 import com.tmjonker.food2u.entities.user.ChangePasswordForm;
-import com.tmjonker.food2u.entities.user.ReturningUserForm;
 import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.entities.user.UserRepository;
-import com.tmjonker.food2u.security.services.DatabaseUserDetailsPasswordService;
-import com.tmjonker.food2u.security.services.DatabaseUserServiceDetails;
+import com.tmjonker.food2u.services.DatabaseUserDetailsPasswordService;
+import com.tmjonker.food2u.services.DatabaseUserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
