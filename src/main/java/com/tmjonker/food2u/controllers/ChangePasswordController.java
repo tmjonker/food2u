@@ -2,7 +2,7 @@ package com.tmjonker.food2u.controllers;
 
 import com.tmjonker.food2u.entities.user.ChangePasswordForm;
 import com.tmjonker.food2u.entities.user.User;
-import com.tmjonker.food2u.entities.user.UserRepository;
+import com.tmjonker.food2u.repositories.UserRepository;
 import com.tmjonker.food2u.services.DatabaseUserDetailsPasswordService;
 import com.tmjonker.food2u.services.DatabaseUserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;

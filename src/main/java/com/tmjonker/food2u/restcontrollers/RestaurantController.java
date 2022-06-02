@@ -1,9 +1,8 @@
 package com.tmjonker.food2u.restcontrollers;
 
 import com.tmjonker.food2u.entities.restaurant.Restaurant;
-import com.tmjonker.food2u.entities.restaurant.RestaurantRepository;
+import com.tmjonker.food2u.repositories.RestaurantRepository;
 import com.tmjonker.food2u.exceptions.RestaurantNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.web.bind.annotation.*;
 

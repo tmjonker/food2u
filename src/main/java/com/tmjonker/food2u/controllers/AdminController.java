@@ -2,10 +2,9 @@ package com.tmjonker.food2u.controllers;
 
 import com.tmjonker.food2u.entities.restaurant.NewRestaurantForm;
 import com.tmjonker.food2u.entities.restaurant.Restaurant;
-import com.tmjonker.food2u.entities.restaurant.RestaurantRepository;
-import com.tmjonker.food2u.entities.user.ReturningUserForm;
+import com.tmjonker.food2u.repositories.RestaurantRepository;
 import com.tmjonker.food2u.entities.user.User;
-import com.tmjonker.food2u.entities.user.UserRepository;
+import com.tmjonker.food2u.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Function;
 
 @Controller

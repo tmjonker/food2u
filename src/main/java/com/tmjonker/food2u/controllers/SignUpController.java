@@ -3,8 +3,9 @@ package com.tmjonker.food2u.controllers;
 import com.tmjonker.food2u.entities.user.NewUserForm;
 import com.tmjonker.food2u.entities.user.ReturningUserForm;
 import com.tmjonker.food2u.entities.user.User;
-import com.tmjonker.food2u.entities.user.UserRepository;
+import com.tmjonker.food2u.repositories.UserRepository;
 import com.tmjonker.food2u.logging.Food2uLogger;
+import com.tmjonker.food2u.services.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,18 +22,15 @@ public class SignUpController {
 
     private static final Logger LOGGER = Food2uLogger.setUp(SignUpController.class.getName());
 
-    private UserRepository userRepository;
-
-    private PasswordEncoder passwordEncoder;
+    private SignUpService signUpService;
 
     @Autowired
-    public SignUpController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    public SignUpController(SignUpService signUpService) {
+        this.signUpService = signUpService;
     }
 
     @GetMapping("/sign-up")
-    public String signUpForm() {
+    public String signUpForm(@ModelAttribute NewUserForm newUserForm) {
 
         return "sign-up";
     }
@@ -50,16 +48,15 @@ public class SignUpController {
         } else if (bindingResult.hasErrors()){ // if the form has errors as defined in template, do not process.
             return "sign-up";
         } else {
-            User newUser = newUserForm.toUser();
-            if (!userRepository.existsByEmail(newUser.getEmail())) { // if user doesn't already exist, create new user.
-                newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-                userRepository.save(newUser);
+            User newUser = signUpService.createNewUser(newUserForm);
+
+            if (newUser != null) {
 
                 // model attributes that are passed to the thymeleaf templates.
                 model.addAttribute("user", newUser);
                 return "welcome";
             } else { // if user already exists, redirect to sign in page.
-                ReturningUserForm returningUserForm = new ReturningUserForm(newUser.getEmail(), true);
+                ReturningUserForm returningUserForm = new ReturningUserForm(newUserForm.getEmail(), true);
                 redirectAttributes.addFlashAttribute("returningUserForm", returningUserForm);
                 return "redirect:/sign-in";
             }

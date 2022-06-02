@@ -1,7 +1,7 @@
 package com.tmjonker.food2u.commandlinerunners;
 
 import com.tmjonker.food2u.entities.user.User;
-import com.tmjonker.food2u.entities.user.UserRepository;
+import com.tmjonker.food2u.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
