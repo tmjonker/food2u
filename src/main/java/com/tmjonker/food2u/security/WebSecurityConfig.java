@@ -1,7 +1,7 @@
 package com.tmjonker.food2u.security;
 
-import com.tmjonker.food2u.services.DatabaseUserDetailsPasswordService;
-import com.tmjonker.food2u.services.DatabaseUserServiceDetails;
+import com.tmjonker.food2u.services.PasswordService;
+import com.tmjonker.food2u.services.UserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -26,19 +26,19 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private DatabaseUserServiceDetails userDetailsService;
+    private UserServiceDetails userServiceDetails;
 
-    private DatabaseUserDetailsPasswordService passwordService;
+    private PasswordService passwordService;
 
     // Factory for connection to persistent_logins table.
     private DataSource dataSource;
 
     @Lazy
     @Autowired
-    public WebSecurityConfig(DatabaseUserServiceDetails userDetailsService, DatabaseUserDetailsPasswordService passwordService,
+    public WebSecurityConfig(UserServiceDetails userServiceDetails, PasswordService passwordService,
                              DataSource dataSource) {
 
-        this.userDetailsService = userDetailsService;
+        this.userServiceDetails = userServiceDetails;
         this.passwordService = passwordService;
         this.dataSource = dataSource;
     }
@@ -100,7 +100,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsPasswordService(
                 this.passwordService);
-        provider.setUserDetailsService(this.userDetailsService);
+        provider.setUserDetailsService(this.userServiceDetails);
         return provider;
     }
 
@@ -117,7 +117,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         AuthenticationManagerBuilder globalAuthBuilder = context
                 .getBean(AuthenticationManagerBuilder.class);
         try {
-            globalAuthBuilder.userDetailsService(userDetailsService);
+            globalAuthBuilder.userDetailsService(userServiceDetails);
         } catch (Exception e) {
             e.printStackTrace();
         }

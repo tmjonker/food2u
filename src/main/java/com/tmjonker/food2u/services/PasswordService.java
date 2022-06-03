@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 // Service that updates passwords for User entities.
 @Service
 @Transactional
-public class DatabaseUserDetailsPasswordService
+public class PasswordService
         implements UserDetailsPasswordService {
 
     private UserRepository userRepository;
@@ -20,7 +20,7 @@ public class DatabaseUserDetailsPasswordService
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public DatabaseUserDetailsPasswordService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public PasswordService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;

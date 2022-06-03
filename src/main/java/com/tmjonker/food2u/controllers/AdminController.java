@@ -1,10 +1,10 @@
 package com.tmjonker.food2u.controllers;
 
-import com.tmjonker.food2u.entities.restaurant.NewRestaurantForm;
+import com.tmjonker.food2u.forms.NewRestaurantForm;
 import com.tmjonker.food2u.entities.restaurant.Restaurant;
-import com.tmjonker.food2u.repositories.RestaurantRepository;
 import com.tmjonker.food2u.entities.user.User;
-import com.tmjonker.food2u.repositories.UserRepository;
+import com.tmjonker.food2u.services.RestaurantService;
+import com.tmjonker.food2u.services.UserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,23 +16,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Function;
 
 @Controller
 public class AdminController {
 
 
-    private UserRepository userRepository;
+    private UserServiceDetails userServiceDetails;
 
-    private RestaurantRepository restaurantRepository;
+    private RestaurantService restaurantService;
 
     @Autowired
-    public AdminController(UserRepository userRepository, RestaurantRepository restaurantRepository) {
+    public AdminController(UserServiceDetails userServiceDetails, RestaurantService restaurantService) {
 
-        this.userRepository = userRepository;
-        this.restaurantRepository = restaurantRepository;
+        this.userServiceDetails = userServiceDetails;
+        this.restaurantService = restaurantService;
     }
 
     @GetMapping("/admin")
@@ -40,9 +37,7 @@ public class AdminController {
                              Model model) {
         // gets current logged in user.
         Principal principal = request.getUserPrincipal();
-        User user = userRepository.findByEmail(principal.getName());
-        user.setLogins(user.getLogins() + 1);
-        userRepository.save(user);
+        User user = userServiceDetails.incrementUserLogins(principal.getName());
 
         model.addAttribute("user", user);
         return "admin";
@@ -55,22 +50,13 @@ public class AdminController {
                               @RequestParam(name="exists", required = false, defaultValue = "false") String exists) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("user", user);
             return "admin";
         } else {
-            Restaurant newRestaurant = newRestaurantForm.toRestaurant();
-            if (!restaurantRepository.existsByNameAndPhoneNumber(newRestaurant.getName(),
-                    newRestaurant.getPhoneNumber())) {
-                restaurantRepository.save(newRestaurant);
-                model.addAttribute("user", user);
+            Restaurant restaurant = restaurantService.checkExistsAndAddRestaurant(newRestaurantForm);
+            if (restaurant != null) {
                 return "redirect:admin?success=true";
             } else {
-                model.addAttribute("newRestaurantForm", newRestaurantForm);
-                model.addAttribute("user", user);
 
-                ArrayList words = new ArrayList<>(Arrays.asList("Hello", "World"));
-
-                Function<Integer, Integer> squareLamba = x -> x*x;
                 return "redirect:admin?exists=true";
             }
         }

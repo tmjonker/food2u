@@ -1,6 +1,6 @@
 package com.tmjonker.food2u.controllers;
 
-import com.tmjonker.food2u.entities.user.ReturningUserForm;
+import com.tmjonker.food2u.forms.ReturningUserForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,5 +1,6 @@
-package com.tmjonker.food2u.entities.restaurant;
+package com.tmjonker.food2u.forms;
 
+import com.tmjonker.food2u.entities.restaurant.Restaurant;
 import com.tmjonker.food2u.entities.user.User;
 
 import javax.validation.constraints.NotNull;

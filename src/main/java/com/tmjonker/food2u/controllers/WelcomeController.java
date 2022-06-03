@@ -2,6 +2,7 @@ package com.tmjonker.food2u.controllers;
 
 import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.repositories.UserRepository;
+import com.tmjonker.food2u.services.UserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +14,12 @@ import java.security.Principal;
 @Controller
 public class WelcomeController {
 
-    private UserRepository userRepository;
+    private UserServiceDetails userServiceDetails;
 
     @Autowired
-    public WelcomeController(UserRepository userRepository) {
+    public WelcomeController(UserServiceDetails userServiceDetails) {
 
-        this.userRepository = userRepository;
+        this.userServiceDetails = userServiceDetails;
     }
 
     @GetMapping("/welcome")
@@ -26,10 +27,10 @@ public class WelcomeController {
 
         // gets the user that is currently logged in.
         Principal principal = request.getUserPrincipal();
-        User user = userRepository.findByEmail(principal.getName());
-        if (!user.getRole().equals("ADMIN"))
-            user.setLogins(user.getLogins() + 1); // Keeps track of the number of logins for the user.
-        userRepository.save(user);
+        User user = (User) userServiceDetails.loadUserByUsername(principal.getName());
+        if (!user.getRole().equals("ADMIN")) {
+            userServiceDetails.incrementUserLogins(principal.getName());
+        }
         // model attributes that are passed to the thymeleaf templates.
         model.addAttribute("user", user);
 
@@ -39,8 +40,7 @@ public class WelcomeController {
             else // if admin user has logged in before, redirect to admin page.
                 return "redirect:/admin";
         } else {
-            // model attributes that are passed to the thymeleaf templates.
-            model.addAttribute("user", user);
+
             return "welcome";
         }
     }

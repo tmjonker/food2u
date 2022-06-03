@@ -1,4 +1,4 @@
-package com.tmjonker.food2u.entities.user;
+package com.tmjonker.food2u.forms;
 
 public class ChangePasswordForm {
 

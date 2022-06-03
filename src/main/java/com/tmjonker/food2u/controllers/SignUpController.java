@@ -1,13 +1,11 @@
 package com.tmjonker.food2u.controllers;
 
-import com.tmjonker.food2u.entities.user.NewUserForm;
-import com.tmjonker.food2u.entities.user.ReturningUserForm;
+import com.tmjonker.food2u.forms.NewUserForm;
+import com.tmjonker.food2u.forms.ReturningUserForm;
 import com.tmjonker.food2u.entities.user.User;
-import com.tmjonker.food2u.repositories.UserRepository;
 import com.tmjonker.food2u.logging.Food2uLogger;
-import com.tmjonker.food2u.services.SignUpService;
+import com.tmjonker.food2u.services.UserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,11 +20,11 @@ public class SignUpController {
 
     private static final Logger LOGGER = Food2uLogger.setUp(SignUpController.class.getName());
 
-    private SignUpService signUpService;
+    private UserServiceDetails userServiceDetails;
 
     @Autowired
-    public SignUpController(SignUpService signUpService) {
-        this.signUpService = signUpService;
+    public SignUpController(UserServiceDetails userServiceDetails) {
+        this.userServiceDetails = userServiceDetails;
     }
 
     @GetMapping("/sign-up")
@@ -48,7 +46,7 @@ public class SignUpController {
         } else if (bindingResult.hasErrors()){ // if the form has errors as defined in template, do not process.
             return "sign-up";
         } else {
-            User newUser = signUpService.createNewUser(newUserForm);
+            User newUser = userServiceDetails.createNewUser(newUserForm);
 
             if (newUser != null) {
 

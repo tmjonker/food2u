@@ -1,10 +1,10 @@
 package com.tmjonker.food2u.controllers;
 
-import com.tmjonker.food2u.entities.user.ChangePasswordForm;
+import com.tmjonker.food2u.forms.ChangePasswordForm;
 import com.tmjonker.food2u.entities.user.User;
 import com.tmjonker.food2u.repositories.UserRepository;
-import com.tmjonker.food2u.services.DatabaseUserDetailsPasswordService;
-import com.tmjonker.food2u.services.DatabaseUserServiceDetails;
+import com.tmjonker.food2u.services.PasswordService;
+import com.tmjonker.food2u.services.UserServiceDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -21,13 +21,13 @@ public class ChangePasswordController {
 
     private UserRepository userRepository;
 
-    private DatabaseUserDetailsPasswordService passwordService;
+    private PasswordService passwordService;
 
-    private DatabaseUserServiceDetails userServiceDetails;
+    private UserServiceDetails userServiceDetails;
 
     @Autowired
-    public ChangePasswordController (UserRepository userRepository, DatabaseUserDetailsPasswordService passwordService,
-                                     DatabaseUserServiceDetails userServiceDetails) {
+    public ChangePasswordController (UserRepository userRepository, PasswordService passwordService,
+                                     UserServiceDetails userServiceDetails) {
 
         this.userRepository = userRepository;
         this.passwordService = passwordService;
