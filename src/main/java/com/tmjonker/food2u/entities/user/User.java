@@ -56,7 +56,6 @@ public class User implements UserDetails {
     private int logins;
 
     public User() {
-        role = Role.USER.name();
     }
 
     public User(String email, String password, String firstName, String middleInitial, String lastName,
